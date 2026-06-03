@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <!-- TODO-checkpoint-5: These packages are needed for xUnit testing -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
+    <PackageReference Include="xunit" Version="2.*" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.*" />
+    <!-- TODO-checkpoint-5: EF Core InMemory is used to create a fake database for testing -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.*" />
+  </ItemGroup>
+
+  <!-- TODO-checkpoint-5: Add a project reference to the main TurtleStore project -->
+  <ItemGroup>
+    <ProjectReference Include="..\Lumivate.TurtleStore\Lumivate.TurtleStore.csproj" />
+  </ItemGroup>
+
+</Project>

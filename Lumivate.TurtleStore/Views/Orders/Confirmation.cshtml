@@ -1,0 +1,41 @@
+@* TODO-checkpoint-6 part E: Add the @model directive for Order *@
+@* Hint: look at how Details.cshtml uses @model for a single object *@
+
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<h1>Order Confirmed!</h1>
+
+@* TODO-checkpoint-6 part E: Display the order confirmation details *@
+@* Most of the view is provided below. Uncomment it, then fill in the missing pieces marked with ??? *@
+@*
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Thank you, @Model.CustomerName!</h5>
+            <p>Your order was placed on @Model.OrderDate.ToString("MMMM dd, yyyy")</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Turtle</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.Turtle.Name</td>
+                            <td>@item.Quantity</td>
+                            <td>$@(item.UnitPrice * item.Quantity)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p><strong>Total: $@Model.Total</strong></p>
+            <!-- TODO-checkpoint-6 part E: Add a "Continue Shopping" link that goes to the Turtles Index page -->
+            <!-- Hint: use an <a> tag with asp-controller and asp-action attributes and class "btn btn-primary" -->
+        </div>
+    </div>
+*@

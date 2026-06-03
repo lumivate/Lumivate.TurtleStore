@@ -1,0 +1,48 @@
+@* TODO-checkpoint-6 part D: Add the @model directive for a list of CartItems *@
+@* @model IEnumerable<Lumivate.TurtleStore.Models.CartItem> *@
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<h1>Shopping Cart</h1>
+
+@* TODO-checkpoint-6 part D: Display the cart items *@
+@* Most of the view is provided below. Uncomment it, then fill in the missing pieces marked with TODO comments *@
+@*
+    @if (!Model.Any())
+    {
+        <p>Your cart is empty. <a asp-controller="Turtles" asp-action="Index">Browse turtles</a></p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Turtle</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Turtle.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>$@(item.Turtle.Price * item.Quantity)</td>
+                        <td>
+                            <!-- TODO-checkpoint-6 part D: Add a Remove button here -->
+                            <!-- It should be a <form> that posts to the Remove action with a hidden turtleId field -->
+                            <!-- Hint: look at how the Delete button works on the Turtles Index page -->
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p><strong>Total: $@Model.Sum(i => i.Turtle.Price * i.Quantity)</strong></p>
+        <!-- TODO-checkpoint-6 part D: Add a Checkout link here -->
+        <!-- It should link to the Orders controller's Checkout action with class "btn btn-success" -->
+    }
+*@

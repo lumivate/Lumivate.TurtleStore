@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@* TODO-checkpoint-1: Update this page to welcome visitors to the Turtle Store! *@
+@* Replace the content below with something like: *@
+@*
+    <div class="text-center">
+        <h1 class="display-4">Welcome to the Turtle Store!</h1>
+        <p class="lead">Your one-stop shop for friendly, adorable turtles.</p>
+        <p>Browse our collection of turtles and find your new shelled companion today.</p>
+        <a asp-controller="Turtles" asp-action="Index" class="btn btn-success btn-lg mt-3">Browse Turtles</a>
+    </div>
+*@
+
+<div class="turtle-hero text-center">
+    <div class="turtle-swim" aria-hidden="true">&#x1F422;</div>
+    <h1 class="display-4" style="color: white;">Welcome</h1>
+    <p class="lead">Learn about <a href="https://learn.microsoft.com/aspnet/core" style="color: #c8e6c9; text-decoration: underline;">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row text-center mt-4">
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 p-4">
+            <div style="font-size: 2.5rem;">&#x1F331;</div>
+            <h5 class="mt-2">Fresh &amp; Friendly</h5>
+            <p class="text-muted">All our turtles are happy and well-cared-for.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 p-4">
+            <div style="font-size: 2.5rem;">&#x1F30A;</div>
+            <h5 class="mt-2">Many Species</h5>
+            <p class="text-muted">From painted turtles to red-eared sliders.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 p-4">
+            <div style="font-size: 2.5rem;">&#x1F49A;</div>
+            <h5 class="mt-2">Great Prices</h5>
+            <p class="text-muted">Find a shelled companion at any budget.</p>
+        </div>
+    </div>
+</div>
+
+<div class="turtle-wave" aria-hidden="true">&#x1F422; &#x1F30A; &#x1F422; &#x1F30A; &#x1F422;</div>

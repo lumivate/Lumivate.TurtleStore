@@ -1,0 +1,191 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background: linear-gradient(180deg, #e8f5e9 0%, #ffffff 40%);
+  min-height: 100vh;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+/* ===== Turtle Store Fun Styles ===== */
+
+/* Turtle-themed hero section */
+.turtle-hero {
+  background: linear-gradient(135deg, #2e7d32 0%, #43a047 50%, #66bb6a 100%);
+  color: white;
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.turtle-hero::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+
+.turtle-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: -20px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 50%;
+}
+
+.turtle-hero h1 {
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.turtle-hero p {
+  font-size: 1.15rem;
+  opacity: 0.95;
+}
+
+/* Floating turtle animation */
+.turtle-float {
+  display: inline-block;
+  font-size: 3rem;
+  animation: turtleFloat 3s ease-in-out infinite;
+}
+
+@keyframes turtleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Slow swim for hero turtle */
+.turtle-swim {
+  display: inline-block;
+  font-size: 4rem;
+  animation: turtleSwim 4s ease-in-out infinite;
+}
+
+@keyframes turtleSwim {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(8px) rotate(3deg); }
+  75% { transform: translateX(-8px) rotate(-3deg); }
+}
+
+/* Wave decoration for page bottoms */
+.turtle-wave {
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: 0.5rem;
+  opacity: 0.3;
+  margin-top: 2rem;
+  user-select: none;
+}
+
+/* Table styling for turtle theme */
+.table thead {
+  background-color: #2e7d32;
+  color: white;
+}
+
+.table thead th {
+  border-bottom: none;
+  padding: 0.75rem 1rem;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e8f5e9;
+}
+
+/* Card enhancements */
+.card {
+  border: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border-radius: 0.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+/* Button enhancements */
+.btn-success {
+  background-color: #2e7d32;
+  border-color: #2e7d32;
+}
+
+.btn-success:hover {
+  background-color: #1b5e20;
+  border-color: #1b5e20;
+}
+
+/* Page heading styles */
+h1 {
+  color: #2e7d32;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+/* Fun badge for availability */
+.badge-available {
+  background-color: #43a047;
+  color: white;
+  padding: 0.3em 0.7em;
+  border-radius: 1rem;
+  font-size: 0.85rem;
+}
+
+.badge-unavailable {
+  background-color: #e57373;
+  color: white;
+  padding: 0.3em 0.7em;
+  border-radius: 1rem;
+  font-size: 0.85rem;
+}
+
+/* Subtle pulse for the browse button */
+.btn-browse {
+  animation: subtlePulse 2s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(46,125,50,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(46,125,50,0); }
+}
+
+/* Footer styling */
+.footer {
+  background-color: #f1f8e9;
+}

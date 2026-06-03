@@ -1,0 +1,47 @@
+@* TODO-checkpoint-3 part E: Add the @model directive for Turtle *@
+@* @model Lumivate.TurtleStore.Models.Turtle *@
+
+@{
+    ViewData["Title"] = "Edit Turtle";
+}
+
+<h1>Edit Turtle</h1>
+
+@* TODO-checkpoint-3 part E: Create a form to edit an existing turtle *@
+@* This form is very similar to Create, but it pre-fills the fields with the turtle's current values. *@
+@* Notice the hidden input for the Id - this is needed so the POST action knows which turtle to update. *@
+@*
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Species" class="form-label"></label>
+            <input asp-for="Species" class="form-control" />
+            <span asp-validation-for="Species" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsAvailable" class="form-check-input" />
+            <label asp-for="IsAvailable" class="form-check-label"></label>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+*@
+
+@* TODO-checkpoint-3 part E: Add validation scripts section *@
+@* @section Scripts { *@
+@*     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); } *@
+@* } *@

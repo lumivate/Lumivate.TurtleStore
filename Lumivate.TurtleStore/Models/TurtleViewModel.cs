@@ -1,0 +1,8 @@
+namespace Lumivate.TurtleStore.Models
+{
+    // TODO-checkpoint-2: Create a TurtleViewModel class
+    // This ViewModel wraps the turtle list for the view.
+    // Add the following properties:
+    //   - Turtles (List<Turtle>)
+    //   - SearchTerm (string?) - optional, for future filtering
+}
