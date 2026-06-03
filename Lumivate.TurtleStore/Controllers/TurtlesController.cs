@@ -130,7 +130,8 @@ namespace Lumivate.TurtleStore.Controllers
 				new Turtle { Id = 2, Name = "Tank", Species = "Box Turtle", Price = 49.99m, Description = "A sturdy and calm companion.", IsAvailable = true },
 				new Turtle { Id = 3, Name = "Speedy", Species = "Painted Turtle", Price = 24.99m, Description = "Surprisingly quick for a turtle!", IsAvailable = true }
 			};
-			return View(turtles);
+			var viewModel = new TurtleViewModel { Turtles = turtles };
+			return View(viewModel);
 		}
 	}
 }

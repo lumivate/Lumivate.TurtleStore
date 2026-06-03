@@ -2,7 +2,7 @@
 @* For checkpoint 1, use: @model IEnumerable<Lumivate.TurtleStore.Models.Turtle> *@
 @* TODO-checkpoint-2: Refactor the @model directive to use TurtleViewModel instead *@
 @* @model Lumivate.TurtleStore.Models.TurtleViewModel *@
-@model IEnumerable<Lumivate.TurtleStore.Models.Turtle>
+@model Lumivate.TurtleStore.Models.TurtleViewModel
 
 @{
     ViewData["Title"] = "Our Turtles";
@@ -78,7 +78,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var turtle in Model)
+        @foreach (var turtle in Model.Turtles)
         {
             <tr>
                 <td>@turtle.Name</td>
