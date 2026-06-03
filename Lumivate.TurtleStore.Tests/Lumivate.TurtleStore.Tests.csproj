@@ -10,6 +10,7 @@
   <!-- TODO-checkpoint-5: These packages are needed for xUnit testing -->
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
+    <PackageReference Include="Moq" Version="4.*" />
     <PackageReference Include="xunit" Version="2.*" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.*" />
     <!-- TODO-checkpoint-5: EF Core InMemory is used to create a fake database for testing -->
