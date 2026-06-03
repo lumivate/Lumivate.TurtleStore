@@ -1,3 +1,6 @@
+using Lumivate.TurtleStore.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Lumivate.TurtleStore
 {
     public class Program
@@ -12,6 +15,8 @@ namespace Lumivate.TurtleStore
             // TODO-checkpoint-3 part A: Register the EF Core DbContext here
             // builder.Services.AddDbContext<TurtleStoreContext>(options =>
             //     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<TurtleStoreContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // TODO-checkpoint-4: Register TurtleService for dependency injection here
             // builder.Services.AddScoped<ITurtleService, TurtleService>();

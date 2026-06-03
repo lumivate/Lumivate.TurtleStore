@@ -1,3 +1,4 @@
+using Lumivate.TurtleStore.Data;
 using Lumivate.TurtleStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -122,16 +123,93 @@ namespace Lumivate.TurtleStore.Controllers
 	//   - Your controller will look so clean after this!
 	public class TurtlesController : Controller
 	{
+		private readonly TurtleStoreContext _context;
+
+		public TurtlesController(TurtleStoreContext context)
+		{
+			_context = context;
+		}
+
 		public IActionResult Index()
 		{
-			List<Turtle> turtles = new List<Turtle>
-			{
-				new Turtle { Id = 1, Name = "Shelly", Species = "Red-Eared Slider", Price = 29.99m, Description = "A friendly and curious turtle.", IsAvailable = true },
-				new Turtle { Id = 2, Name = "Tank", Species = "Box Turtle", Price = 49.99m, Description = "A sturdy and calm companion.", IsAvailable = true },
-				new Turtle { Id = 3, Name = "Speedy", Species = "Painted Turtle", Price = 24.99m, Description = "Surprisingly quick for a turtle!", IsAvailable = true }
-			};
+			var turtles = _context.Turtles.ToList();
 			var viewModel = new TurtleViewModel { Turtles = turtles };
 			return View(viewModel);
+		}
+
+		public IActionResult Details(int id)
+		{
+			var turtle = _context.Turtles.FirstOrDefault(t => t.Id == id);
+			if (turtle == null)
+			{
+				return NotFound();
+			}
+			return View(turtle);
+		}
+
+		[HttpGet]
+		public IActionResult Create()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult Create(Turtle turtle)
+		{
+			_context.Turtles.Add(turtle);
+			_context.SaveChanges();
+			return RedirectToAction(nameof(Index));
+		}
+
+		[HttpGet]
+		public IActionResult Edit(int id)
+		{
+			var turtle = _context.Turtles.FirstOrDefault(t => t.Id == id);
+			if (turtle == null)
+			{
+				return NotFound();
+			}
+			return View(turtle);
+		}
+
+		[HttpPost]
+		public IActionResult Edit(Turtle turtle)
+		{
+			var existing = _context.Turtles.FirstOrDefault(t => t.Id == turtle.Id);
+			if (existing == null)
+			{
+				return NotFound();
+			}
+			existing.Name = turtle.Name;
+			existing.Species = turtle.Species;
+			existing.Description = turtle.Description;
+			existing.Price = turtle.Price;
+			existing.IsAvailable = turtle.IsAvailable;
+			_context.SaveChanges();
+			return RedirectToAction(nameof(Index));
+		}
+
+		[HttpGet]
+		public IActionResult Delete(int id)
+		{
+			var turtle = _context.Turtles.FirstOrDefault(t => t.Id == id);
+			if (turtle == null)
+			{
+				return NotFound();
+			}
+			return View(turtle);
+		}
+
+		[HttpPost, ActionName("Delete")]
+		public IActionResult DeleteConfirmed(int id)
+		{
+			var turtle = _context.Turtles.FirstOrDefault(t => t.Id == id);
+			if (turtle != null)
+			{
+				_context.Turtles.Remove(turtle);
+				_context.SaveChanges();
+			}
+			return RedirectToAction(nameof(Index));
 		}
 	}
 }

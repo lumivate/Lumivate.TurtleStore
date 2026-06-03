@@ -1,5 +1,6 @@
 @* TODO-checkpoint-3 part C: Add the @model directive for a single Turtle *@
 @* @model Lumivate.TurtleStore.Models.Turtle *@
+@model Lumivate.TurtleStore.Models.Turtle
 
 @{
     ViewData["Title"] = "Turtle Details";
@@ -28,3 +29,18 @@
 
 @* TODO-checkpoint-3 parts E and F: Don't forget to add Edit and Delete links on this page! *@
 @* The code above includes them, but make sure you understand what asp-action and asp-route-id do. *@
+
+<div class="card" style="width: 24rem;">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">
+            <strong>Species:</strong> @Model.Species <br />
+            <strong>Price:</strong> $@Model.Price <br />
+            <strong>Available:</strong> @(Model.IsAvailable ? "Yes" : "No") <br />
+            <strong>Description:</strong> @Model.Description
+        </p>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+    </div>
+</div>
