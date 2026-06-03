@@ -9,4 +9,12 @@ namespace Lumivate.TurtleStore.Services
 	//   - void AddTurtle(Turtle turtle)
 	//   - void UpdateTurtle(Turtle turtle)
 	//   - void DeleteTurtle(int id)
+	public interface ITurtleService
+	{
+		List<Turtle> GetAllTurtles();
+		Turtle? GetTurtleById(int id);
+		void AddTurtle(Turtle turtle);
+		void UpdateTurtle(Turtle turtle);
+		void DeleteTurtle(int id);
+	}
 }

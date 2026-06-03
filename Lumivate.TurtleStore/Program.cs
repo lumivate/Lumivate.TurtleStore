@@ -1,4 +1,5 @@
 using Lumivate.TurtleStore.Data;
+using Lumivate.TurtleStore.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lumivate.TurtleStore
@@ -20,6 +21,7 @@ namespace Lumivate.TurtleStore
 
             // TODO-checkpoint-4: Register TurtleService for dependency injection here
             // builder.Services.AddScoped<ITurtleService, TurtleService>();
+            builder.Services.AddScoped<ITurtleService, TurtleService>();
 
             // TODO-checkpoint-6 part D: Register CartService and OrderService for dependency injection
             // builder.Services.AddScoped<ICartService, CartService>();

@@ -1,5 +1,5 @@
-using Lumivate.TurtleStore.Data;
 using Lumivate.TurtleStore.Models;
+using Lumivate.TurtleStore.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lumivate.TurtleStore.Controllers
@@ -123,23 +123,23 @@ namespace Lumivate.TurtleStore.Controllers
 	//   - Your controller will look so clean after this!
 	public class TurtlesController : Controller
 	{
-		private readonly TurtleStoreContext _context;
+		private readonly ITurtleService _turtleService;
 
-		public TurtlesController(TurtleStoreContext context)
+		public TurtlesController(ITurtleService turtleService)
 		{
-			_context = context;
+			_turtleService = turtleService;
 		}
 
 		public IActionResult Index()
 		{
-			var turtles = _context.Turtles.ToList();
+			var turtles = _turtleService.GetAllTurtles();
 			var viewModel = new TurtleViewModel { Turtles = turtles };
 			return View(viewModel);
 		}
 
 		public IActionResult Details(int id)
 		{
-			var turtle = _context.Turtles.FirstOrDefault(t => t.Id == id);
+			var turtle = _turtleService.GetTurtleById(id);
 			if (turtle == null)
 			{
 				return NotFound();
@@ -156,15 +156,14 @@ namespace Lumivate.TurtleStore.Controllers
 		[HttpPost]
 		public IActionResult Create(Turtle turtle)
 		{
-			_context.Turtles.Add(turtle);
-			_context.SaveChanges();
+			_turtleService.AddTurtle(turtle);
 			return RedirectToAction(nameof(Index));
 		}
 
 		[HttpGet]
 		public IActionResult Edit(int id)
 		{
-			var turtle = _context.Turtles.FirstOrDefault(t => t.Id == id);
+			var turtle = _turtleService.GetTurtleById(id);
 			if (turtle == null)
 			{
 				return NotFound();
@@ -175,24 +174,14 @@ namespace Lumivate.TurtleStore.Controllers
 		[HttpPost]
 		public IActionResult Edit(Turtle turtle)
 		{
-			var existing = _context.Turtles.FirstOrDefault(t => t.Id == turtle.Id);
-			if (existing == null)
-			{
-				return NotFound();
-			}
-			existing.Name = turtle.Name;
-			existing.Species = turtle.Species;
-			existing.Description = turtle.Description;
-			existing.Price = turtle.Price;
-			existing.IsAvailable = turtle.IsAvailable;
-			_context.SaveChanges();
+			_turtleService.UpdateTurtle(turtle);
 			return RedirectToAction(nameof(Index));
 		}
 
 		[HttpGet]
 		public IActionResult Delete(int id)
 		{
-			var turtle = _context.Turtles.FirstOrDefault(t => t.Id == id);
+			var turtle = _turtleService.GetTurtleById(id);
 			if (turtle == null)
 			{
 				return NotFound();
@@ -203,12 +192,7 @@ namespace Lumivate.TurtleStore.Controllers
 		[HttpPost, ActionName("Delete")]
 		public IActionResult DeleteConfirmed(int id)
 		{
-			var turtle = _context.Turtles.FirstOrDefault(t => t.Id == id);
-			if (turtle != null)
-			{
-				_context.Turtles.Remove(turtle);
-				_context.SaveChanges();
-			}
+			_turtleService.DeleteTurtle(id);
 			return RedirectToAction(nameof(Index));
 		}
 	}
