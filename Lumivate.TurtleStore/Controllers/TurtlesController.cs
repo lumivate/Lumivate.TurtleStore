@@ -120,4 +120,17 @@ namespace Lumivate.TurtleStore.Controllers
 	//   - Replace TurtleStoreContext with ITurtleService in the constructor
 	//   - Move all EF/DbContext logic into TurtleService and use _turtleService methods instead
 	//   - Your controller will look so clean after this!
+	public class TurtlesController : Controller
+	{
+		public IActionResult Index()
+		{
+			List<Turtle> turtles = new List<Turtle>
+			{
+				new Turtle { Id = 1, Name = "Shelly", Species = "Red-Eared Slider", Price = 29.99m, Description = "A friendly and curious turtle.", IsAvailable = true },
+				new Turtle { Id = 2, Name = "Tank", Species = "Box Turtle", Price = 49.99m, Description = "A sturdy and calm companion.", IsAvailable = true },
+				new Turtle { Id = 3, Name = "Speedy", Species = "Painted Turtle", Price = 24.99m, Description = "Surprisingly quick for a turtle!", IsAvailable = true }
+			};
+			return View(turtles);
+		}
+	}
 }
