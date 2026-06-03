@@ -18,4 +18,60 @@ namespace Lumivate.TurtleStore.Services
 
     // After creating this class, you will register it in Program.cs during part D:
     //   builder.Services.AddScoped<ICartService, CartService>();
+    public class CartService : ICartService
+    {
+        private static List<CartItem> _cartItems = new List<CartItem>();
+        private readonly ITurtleService _turtleService;
+
+        public CartService(ITurtleService turtleService)
+        {
+            _turtleService = turtleService;
+        }
+
+        public List<CartItem> GetCartItems()
+        {
+            return _cartItems;
+        }
+
+        public void AddToCart(int turtleId)
+        {
+            var existingItem = _cartItems.FirstOrDefault(i => i.TurtleId == turtleId);
+            if (existingItem != null)
+            {
+                existingItem.Quantity++;
+            }
+            else
+            {
+                var turtle = _turtleService.GetTurtleById(turtleId);
+                if (turtle != null)
+                {
+                    _cartItems.Add(new CartItem
+                    {
+                        TurtleId = turtleId,
+                        Turtle = turtle,
+                        Quantity = 1
+                    });
+                }
+            }
+        }
+
+        public void RemoveFromCart(int turtleId)
+        {
+            var item = _cartItems.FirstOrDefault(i => i.TurtleId == turtleId);
+            if (item != null)
+            {
+                _cartItems.Remove(item);
+            }
+        }
+
+        public decimal GetCartTotal()
+        {
+            return _cartItems.Sum(i => i.Turtle.Price * i.Quantity);
+        }
+
+        public void ClearCart()
+        {
+            _cartItems.Clear();
+        }
+    }
 }

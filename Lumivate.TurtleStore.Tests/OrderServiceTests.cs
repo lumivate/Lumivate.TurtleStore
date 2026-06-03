@@ -44,9 +44,91 @@
 //        // Assert - verify the result is null
 //    }
 
+using Lumivate.TurtleStore.Models;
+using Lumivate.TurtleStore.Services;
+using Xunit;
+
 namespace Lumivate.TurtleStore.Tests
 {
     // TODO-checkpoint-6 part F: Uncomment and complete the test class above
     // Unlike the previous test files, this one has less code provided.
     // Use the TurtleServiceTests as a reference for the Arrange-Act-Assert pattern.
+    public class OrderServiceTests
+    {
+        private List<CartItem> CreateTestCartItems()
+        {
+            return new List<CartItem>
+            {
+                new CartItem
+                {
+                    TurtleId = 1,
+                    Turtle = new Turtle { Id = 1, Name = "Shelly", Species = "Red-Eared Slider", Price = 29.99m, IsAvailable = true },
+                    Quantity = 2
+                },
+                new CartItem
+                {
+                    TurtleId = 2,
+                    Turtle = new Turtle { Id = 2, Name = "Tank", Species = "Box Turtle", Price = 49.99m, IsAvailable = true },
+                    Quantity = 1
+                }
+            };
+        }
+
+        [Fact]
+        public void PlaceOrder_CreatesOrderWithCorrectCustomerName()
+        {
+            // Arrange
+            var orderService = new OrderService();
+            var cartItems = CreateTestCartItems();
+
+            // Act
+            var order = orderService.PlaceOrder("John Doe", cartItems);
+
+            // Assert
+            Assert.Equal("John Doe", order.CustomerName);
+        }
+
+        [Fact]
+        public void PlaceOrder_CalculatesCorrectTotal()
+        {
+            // Arrange
+            var orderService = new OrderService();
+            var cartItems = CreateTestCartItems();
+
+            // Act
+            var order = orderService.PlaceOrder("John Doe", cartItems);
+
+            // Assert - Total should be (29.99 * 2) + (49.99 * 1) = 109.97
+            Assert.Equal(109.97m, order.Total);
+        }
+
+        [Fact]
+        public void GetOrderById_WithValidId_ReturnsOrder()
+        {
+            // Arrange
+            var orderService = new OrderService();
+            var cartItems = CreateTestCartItems();
+            var placedOrder = orderService.PlaceOrder("John Doe", cartItems);
+
+            // Act
+            var result = orderService.GetOrderById(placedOrder.Id);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(placedOrder.Id, result.Id);
+        }
+
+        [Fact]
+        public void GetOrderById_WithInvalidId_ReturnsNull()
+        {
+            // Arrange
+            var orderService = new OrderService();
+
+            // Act
+            var result = orderService.GetOrderById(999);
+
+            // Assert
+            Assert.Null(result);
+        }
+    }
 }

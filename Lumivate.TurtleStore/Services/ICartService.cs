@@ -9,4 +9,12 @@ namespace Lumivate.TurtleStore.Services
 	//   - void RemoveFromCart(int turtleId)
 	//   - decimal GetCartTotal()
 	//   - void ClearCart()
+	public interface ICartService
+	{
+		List<CartItem> GetCartItems();
+		void AddToCart(int turtleId);
+		void RemoveFromCart(int turtleId);
+		decimal GetCartTotal();
+		void ClearCart();
+	}
 }

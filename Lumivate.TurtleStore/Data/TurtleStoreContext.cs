@@ -40,6 +40,8 @@ namespace Lumivate.TurtleStore.Data
 		public TurtleStoreContext(DbContextOptions<TurtleStoreContext> options) : base(options) { }
 
 		public DbSet<Turtle> Turtles { get; set; }
+		public DbSet<Order> Orders { get; set; }
+		public DbSet<OrderItem> OrderItems { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

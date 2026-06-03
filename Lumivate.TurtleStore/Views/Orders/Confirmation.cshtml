@@ -1,5 +1,6 @@
 @* TODO-checkpoint-6 part E: Add the @model directive for Order *@
 @* Hint: look at how Details.cshtml uses @model for a single object *@
+@model Lumivate.TurtleStore.Models.Order
 
 @{
     ViewData["Title"] = "Order Confirmation";
@@ -39,3 +40,31 @@
         </div>
     </div>
 *@
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Thank you, @Model.CustomerName!</h5>
+        <p>Your order was placed on @Model.OrderDate.ToString("MMMM dd, yyyy")</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Turtle</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Turtle.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>$@(item.UnitPrice * item.Quantity)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p><strong>Total: $@Model.Total</strong></p>
+        <a asp-controller="Turtles" asp-action="Index" class="btn btn-primary">Continue Shopping</a>
+    </div>
+</div>

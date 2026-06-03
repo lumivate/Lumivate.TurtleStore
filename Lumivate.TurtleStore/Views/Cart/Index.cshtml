@@ -1,5 +1,6 @@
 @* TODO-checkpoint-6 part D: Add the @model directive for a list of CartItems *@
 @* @model IEnumerable<Lumivate.TurtleStore.Models.CartItem> *@
+@model IEnumerable<Lumivate.TurtleStore.Models.CartItem>
 
 @{
     ViewData["Title"] = "Shopping Cart";
@@ -46,3 +47,39 @@
         <!-- It should link to the Orders controller's Checkout action with class "btn btn-success" -->
     }
 *@
+
+@if (!Model.Any())
+{
+    <p>Your cart is empty. <a asp-controller="Turtles" asp-action="Index">Browse turtles</a></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Turtle</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Turtle.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>$@(item.Turtle.Price * item.Quantity)</td>
+                    <td>
+                        <form asp-controller="Cart" asp-action="Remove" method="post">
+                            <input type="hidden" name="turtleId" value="@item.TurtleId" />
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p><strong>Total: $@Model.Sum(i => i.Turtle.Price * i.Quantity)</strong></p>
+    <a asp-controller="Orders" asp-action="Checkout" class="btn btn-success">Checkout</a>
+}

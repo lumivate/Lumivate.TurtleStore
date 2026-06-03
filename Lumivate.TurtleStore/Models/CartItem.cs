@@ -6,4 +6,10 @@ namespace Lumivate.TurtleStore.Models
     //   - TurtleId (int)
     //   - Turtle (Turtle) - navigation property to the Turtle being purchased
     //   - Quantity (int)
+    public class CartItem
+    {
+        public int TurtleId { get; set; }
+        public Turtle Turtle { get; set; } = null!;
+        public int Quantity { get; set; }
+    }
 }

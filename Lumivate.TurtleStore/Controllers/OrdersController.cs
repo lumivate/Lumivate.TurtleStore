@@ -1,4 +1,5 @@
 using Lumivate.TurtleStore.Models;
+using Lumivate.TurtleStore.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lumivate.TurtleStore.Controllers
@@ -20,4 +21,37 @@ namespace Lumivate.TurtleStore.Controllers
     //   - Confirmation(int id) [HttpGet]: Display the order confirmation
     //     Use the IOrderService to fetch the order by id
     //     Return View(order)
+    public class OrdersController : Controller
+    {
+        private readonly IOrderService _orderService;
+        private readonly ICartService _cartService;
+
+        public OrdersController(IOrderService orderService, ICartService cartService)
+        {
+            _orderService = orderService;
+            _cartService = cartService;
+        }
+
+        [HttpGet]
+        public IActionResult Checkout()
+        {
+            return View(new Order());
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(Order order)
+        {
+            var cartItems = _cartService.GetCartItems();
+            var placedOrder = _orderService.PlaceOrder(order.CustomerName, cartItems);
+            _cartService.ClearCart();
+            return RedirectToAction("Confirmation", new { id = placedOrder.Id });
+        }
+
+        [HttpGet]
+        public IActionResult Confirmation(int id)
+        {
+            var order = _orderService.GetOrderById(id);
+            return View(order);
+        }
+    }
 }

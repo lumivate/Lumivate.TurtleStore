@@ -22,4 +22,33 @@ namespace Lumivate.TurtleStore.Controllers
     //   - Remove(int turtleId) [HttpPost]: Remove a turtle from the cart
     //     Call _cartService.RemoveFromCart(turtleId)
     //     Redirect to the Cart Index page
+    public class CartController : Controller
+    {
+        private readonly ICartService _cartService;
+
+        public CartController(ICartService cartService)
+        {
+            _cartService = cartService;
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View(_cartService.GetCartItems());
+        }
+
+        [HttpPost]
+        public IActionResult Add(int turtleId)
+        {
+            _cartService.AddToCart(turtleId);
+            return RedirectToAction("Index", "Turtles");
+        }
+
+        [HttpPost]
+        public IActionResult Remove(int turtleId)
+        {
+            _cartService.RemoveFromCart(turtleId);
+            return RedirectToAction("Index");
+        }
+    }
 }
